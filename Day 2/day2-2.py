@@ -1,11 +1,15 @@
 def calculateRoundScore(opponent, resultChar):
     '''
-        1 - Rock
-        2 - Paper
-        3 - Scissors
+        0 - Rock        -1 - Lose
+        1 - Paper        0 - Draw
+        2 - Scissors     1 - Win
     '''
-    opponentMove = ord(opponent) - ord("A") + 1
-    result = ord(resultChar) - ord("X") + 1
+    opponentMove = ord(opponent) - ord("A")
+    result = ord(resultChar) - ord("X") - 1
+
+    playerMove = (opponentMove + result) % 3
+
+    return (playerMove + 1) + (result + 1) * 3
 
 def findTotalScore():
     filename = "input.txt"
