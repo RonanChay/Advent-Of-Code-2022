@@ -15,7 +15,6 @@ def findBadgeItem(rucksack1, rucksack2, rucksack3):
     print("rucksack3: ", rucksack3)
     return "-"
 
-
 def findTotalPriority():
     filename = "input.txt"
     filePtr = open(filename)
@@ -33,7 +32,6 @@ def findTotalPriority():
             group = []
 
     print(totalPriority)
-
 
 findTotalPriority()
 
