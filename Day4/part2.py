@@ -11,8 +11,6 @@ def hasOverlap(group):
     else:
         return True
 
-
-
 def findTotalOverlaps():
     filename = "input.txt"
     filePtr = open(filename)
