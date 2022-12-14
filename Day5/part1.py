@@ -11,17 +11,13 @@ def moveCrates(stacks, amount, start, end):
     for i in range(amount):
         stacks[end].append(stacks[start].pop())
 
-def rearrangeCrates():
-    filename = "input.txt"
-    filePtr = open(filename)
-
+def setupStacks(filePtr):
     numStacks = len(filePtr.readline()) // 4
     stacks = [[] for i in range(numStacks)]
     filePtr.seek(0)
 
-    isSetupComplete = False
     for line in filePtr:
-        if not isSetupComplete and len(line) > 1:
+        if len(line) > 1:
             for i in range(0, numStacks, 1):
                 position = (i * 4) + 1
                 if line[position] != " ":
@@ -31,12 +27,18 @@ def rearrangeCrates():
             for i in range(numStacks):
                 stacks[i].pop()
                 stacks[i].reverse()
-            isSetupComplete = True
-            continue
-        
-        if isSetupComplete:
-            inputs = parseMoveInput(line)
-            moveCrates(stacks, inputs[0], inputs[1] - 1, inputs[2] - 1)
+            break
+    
+    return stacks
+
+def rearrangeCrates():
+    filename = "input.txt"
+    filePtr = open(filename)
+    stacks = setupStacks(filePtr)
+    
+    for line in filePtr:
+        inputs = parseMoveInput(line)
+        moveCrates(stacks, inputs[0], inputs[1] - 1, inputs[2] - 1)
     
     top = ""
     for stack in stacks:
